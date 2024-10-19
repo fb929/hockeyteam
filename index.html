@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Switcher</title>
+    <title>Хоккейная команда PeaceData</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +19,12 @@
             background-color: #4CAF50;
             color: white;
             margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .container {
@@ -60,12 +66,21 @@
             font-size: 18px;
             line-height: 1.6;
         }
+
+        #title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
     <script>
         async function loadText(language) {
             const response = await fetch(language + '.txt');
             const text = await response.text();
-            document.getElementById('content').textContent = text;
+            const [title, content] = text.split('\n\n'); // Split text into title and content
+
+            document.getElementById('title').textContent = title;
+            document.getElementById('content').textContent = content;
             highlightActiveButton(language);
         }
 
@@ -82,14 +97,17 @@
     </script>
 </head>
 <body onload="loadText('ru')">
-    <h1>Language Switcher</h1>
+    <h1>Хоккейная команда PeaceData</h1>
     <div class="container">
         <div class="buttons">
             <button data-lang="ru" onclick="switchLanguage('ru')" class="active">Русский</button>
             <button data-lang="es" onclick="switchLanguage('es')">Español</button>
         </div>
+        <h2 id="title">
+            <!-- Title will be loaded here -->
+        </h2>
         <div id="content">
-            <!-- Text will be loaded here -->
+            <!-- Text content will be loaded here -->
         </div>
     </div>
 </body>
